@@ -119,8 +119,8 @@ public class RebalanceRunnable extends GoalBasedOperationRunnable {
                                                                 _isRebalanceDiskMode, _skipHardGoalCheck, !_isTriggeredByUserRequest,
                                                                 _fastMode);
     OptimizerResult result = proposalsRunnable.computeResult();
-    LOG.debug("workWithoutClusterModel");
-    LOG.debug(result.toString());
+    System.out.println("workWithoutClusterModel");
+    System.out.println(result.toString());
     if (!_dryRun) {
       _kafkaCruiseControl.executeProposals(result.goalProposals(), Collections.emptySet(), isKafkaAssignerMode(_goals),
           _concurrentInterBrokerPartitionMovements, _maxInterBrokerPartitionMovements,

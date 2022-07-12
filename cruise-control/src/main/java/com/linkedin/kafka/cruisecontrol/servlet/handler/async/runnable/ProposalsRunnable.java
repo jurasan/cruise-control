@@ -115,16 +115,16 @@ public class ProposalsRunnable extends GoalBasedOperationRunnable {
                                                                          _fastMode);
     
     OptimizerResult result =  _kafkaCruiseControl.optimizations(clusterModel, _goalsByPriority, _operationProgress, null, optimizationOptions);
-    LOG.debug("workWithClusterModel");
-    LOG.debug(result.toString());
+    System.out.println("workWithClusterModel");
+    System.out.println(result.toString());
     return result;
   }
 
   @Override
   protected OptimizerResult workWithoutClusterModel() throws KafkaCruiseControlException {
     OptimizerResult result = _kafkaCruiseControl.getProposals(_operationProgress, _allowCapacityEstimation);
-    LOG.debug("workWithoutClusterModel");
-    LOG.debug(result.toString());
+    System.out.println("workWithoutClusterModel");
+    System.out.println(result.toString());
     return result;
   }
 

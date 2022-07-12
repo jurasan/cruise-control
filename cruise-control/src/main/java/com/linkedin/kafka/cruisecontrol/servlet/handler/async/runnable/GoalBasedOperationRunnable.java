@@ -184,8 +184,8 @@ public abstract class GoalBasedOperationRunnable extends OperationRunnable {
         finish();
       }
     }
-    LOG.debug("computeResult");
-    LOG.debug(result.toString());
+    System.out.println("computeResult");
+    System.out.println(result.toString());
     return result;
   }
 
