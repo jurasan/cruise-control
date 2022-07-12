@@ -15,6 +15,8 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 import java.util.function.Supplier;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import static com.linkedin.kafka.cruisecontrol.servlet.handler.async.runnable.RunnableUtils.SELF_HEALING_DESTINATION_BROKER_IDS;
 import static com.linkedin.kafka.cruisecontrol.servlet.handler.async.runnable.RunnableUtils.SELF_HEALING_REPLICA_MOVEMENT_STRATEGY;
@@ -28,6 +30,7 @@ import static com.linkedin.kafka.cruisecontrol.servlet.handler.async.runnable.Ru
  * The async runnable for balancing the cluster load.
  */
 public class RebalanceRunnable extends GoalBasedOperationRunnable {
+  private static final Logger LOG = LoggerFactory.getLogger(RebalanceRunnable.class);
   public static final boolean SELF_HEALING_IGNORE_PROPOSAL_CACHE = false;
   public static final boolean SELF_HEALING_IS_REBALANCE_DISK_MODE = false;
   protected final Integer _concurrentInterBrokerPartitionMovements;
@@ -116,6 +119,8 @@ public class RebalanceRunnable extends GoalBasedOperationRunnable {
                                                                 _isRebalanceDiskMode, _skipHardGoalCheck, !_isTriggeredByUserRequest,
                                                                 _fastMode);
     OptimizerResult result = proposalsRunnable.computeResult();
+    LOG.debug("workWithoutClusterModel");
+    LOG.debug(result.toString());
     if (!_dryRun) {
       _kafkaCruiseControl.executeProposals(result.goalProposals(), Collections.emptySet(), isKafkaAssignerMode(_goals),
           _concurrentInterBrokerPartitionMovements, _maxInterBrokerPartitionMovements,
