@@ -159,8 +159,6 @@ public abstract class GoalBasedOperationRunnable extends OperationRunnable {
       _kafkaCruiseControl.setGeneratingProposalsForExecution(_uuid, _reasonSupplier, _isTriggeredByUserRequest);
     }
     OptimizerResult result;
-    LOG.debug("computeResult");
-    LOG.debug(result.toString());
     if (shouldWorkWithClusterModel()) {
       try (AutoCloseable ignored = _kafkaCruiseControl.acquireForModelGeneration(_operationProgress)) {
         result = workWithClusterModel();
@@ -186,6 +184,8 @@ public abstract class GoalBasedOperationRunnable extends OperationRunnable {
         finish();
       }
     }
+    LOG.debug("computeResult");
+    LOG.debug(result.toString());
     return result;
   }
 
