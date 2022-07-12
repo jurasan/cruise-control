@@ -18,6 +18,8 @@ import java.util.Set;
 import java.util.concurrent.TimeoutException;
 import java.util.function.Supplier;
 import java.util.regex.Pattern;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import static com.linkedin.kafka.cruisecontrol.servlet.handler.async.runnable.RunnableUtils.computeOptimizationOptions;
 import static com.linkedin.kafka.cruisecontrol.servlet.handler.async.runnable.RunnableUtils.sanityCheckBrokersHavingOfflineReplicasOnBadDisks;
@@ -28,6 +30,7 @@ import static com.linkedin.kafka.cruisecontrol.servlet.parameters.ParameterUtils
  * The async runnable for getting proposals.
  */
 public class ProposalsRunnable extends GoalBasedOperationRunnable {
+  private static final Logger LOG = LoggerFactory.getLogger(ProposalsRunnable.class);
   protected final boolean _ignoreProposalCache;
   protected final Set<Integer> _destinationBrokerIds;
   protected final boolean _isRebalanceDiskMode;
@@ -110,13 +113,19 @@ public class ProposalsRunnable extends GoalBasedOperationRunnable {
                                                                          _destinationBrokerIds,
                                                                          false,
                                                                          _fastMode);
-
-    return _kafkaCruiseControl.optimizations(clusterModel, _goalsByPriority, _operationProgress, null, optimizationOptions);
+    
+    OptimizerResult result =  _kafkaCruiseControl.optimizations(clusterModel, _goalsByPriority, _operationProgress, null, optimizationOptions);
+    LOG.debug("workWithClusterModel");
+    LOG.debug(result.toString());
+    return result;
   }
 
   @Override
   protected OptimizerResult workWithoutClusterModel() throws KafkaCruiseControlException {
-    return _kafkaCruiseControl.getProposals(_operationProgress, _allowCapacityEstimation);
+    OptimizerResult result = _kafkaCruiseControl.getProposals(_operationProgress, _allowCapacityEstimation);
+    LOG.debug("workWithoutClusterModel");
+    LOG.debug(result.toString());
+    return result;
   }
 
   @Override
