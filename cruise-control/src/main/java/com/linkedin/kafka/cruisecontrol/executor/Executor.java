@@ -1342,13 +1342,6 @@ public class Executor {
       int numTotalPartitionMovements = _executionTaskManager.numRemainingInterBrokerPartitionMovements();
       long totalDataToMoveInMB = _executionTaskManager.remainingInterBrokerDataToMoveInMB();
       LOG.info("Starting {} inter-broker partition movements.", numTotalPartitionMovements);
-      
-      Gson gson = new Gson();
-        tasksToExecute.forEach((task) -> {
-          Map<String, Object> taskJsonStructure = task.getJsonStructure();
-          String taskJson  = gson.toJson(taskJsonStructure);
-          System.out.println(String.format("Task to execute %s", taskJson));
-        });
 
       int partitionsToMove = numTotalPartitionMovements;
       // Exhaust all the pending partition movements.
@@ -1356,6 +1349,13 @@ public class Executor {
         // Get tasks to execute.
         List<ExecutionTask> tasksToExecute = _executionTaskManager.getInterBrokerReplicaMovementTasks();
         LOG.info("Executor will execute {} task(s)", tasksToExecute.size());
+
+        Gson gson = new Gson();
+        tasksToExecute.forEach((task) -> {
+          Map<String, Object> taskJsonStructure = task.getJsonStructure();
+          String taskJson  = gson.toJson(taskJsonStructure);
+          System.out.println(String.format("Task to execute %s", taskJson));
+        });
 
         AlterPartitionReassignmentsResult result = null;
         if (!tasksToExecute.isEmpty()) {
