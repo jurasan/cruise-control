@@ -1345,7 +1345,7 @@ public class Executor {
       
       Gson gson = new Gson();
       for (ExecutionTask task: tasksToExecute){
-        Map<String, Object> taskJsonStructure = task.getJsonStructure()
+        Map<String, Object> taskJsonStructure = task.getJsonStructure();
         // task.getJsonStructure();
         // String taskJson  = gson.toJson();
       //   System.out.println(String.format("Task to execute %s", ));
