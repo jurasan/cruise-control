@@ -60,6 +60,8 @@ public class OptimizerResult {
   private static final String PROVISION_STATUS = "provisionStatus";
   @JsonResponseField
   private static final String PROVISION_RECOMMENDATION = "provisionRecommendation";
+  @JsonResponseField
+  private static final String EXECUTION_PROPOSALS = "executionProposals";
   private static final String VIOLATED = "VIOLATED";
   private static final String FIXED = "FIXED";
   private static final String NO_ACTION = "NO-ACTION";
@@ -315,6 +317,7 @@ public class OptimizerResult {
     ret.put(ON_DEMAND_BALANCEDNESS_SCORE_AFTER, _onDemandBalancednessScoreAfter);
     ret.put(PROVISION_STATUS, _provisionResponse.status());
     ret.put(PROVISION_RECOMMENDATION, _provisionResponse.recommendation());
+    ret.put(EXECUTION_PROPOSALS, _proposals);
     return ret;
   }
 }
