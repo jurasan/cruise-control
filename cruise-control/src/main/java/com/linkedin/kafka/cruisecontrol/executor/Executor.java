@@ -1341,6 +1341,11 @@ public class Executor {
       int numTotalPartitionMovements = _executionTaskManager.numRemainingInterBrokerPartitionMovements();
       long totalDataToMoveInMB = _executionTaskManager.remainingInterBrokerDataToMoveInMB();
       LOG.info("Starting {} inter-broker partition movements.", numTotalPartitionMovements);
+      
+      Gson gson = new Gson();
+      for (ExecutionTask task: tasksToExecute){
+        System.out.println(String.format("Task to execute %s", gson.toJson(task.getJsonStructure())));
+      }
 
       int partitionsToMove = numTotalPartitionMovements;
       // Exhaust all the pending partition movements.
