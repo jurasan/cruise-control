@@ -1344,12 +1344,11 @@ public class Executor {
       LOG.info("Starting {} inter-broker partition movements.", numTotalPartitionMovements);
       
       Gson gson = new Gson();
-      for (ExecutionTask task: tasksToExecute){
-        Map<String, Object> taskJsonStructure = task.getJsonStructure();
-        // task.getJsonStructure();
-        // String taskJson  = gson.toJson();
-      //   System.out.println(String.format("Task to execute %s", ));
-      }
+        tasksToExecute.forEach((task) -> {
+          Map<String, Object> taskJsonStructure = task.getJsonStructure();
+          String taskJson  = gson.toJson(taskJsonStructure);
+          System.out.println(String.format("Task to execute %s", taskJson));
+        });
 
       int partitionsToMove = numTotalPartitionMovements;
       // Exhaust all the pending partition movements.
