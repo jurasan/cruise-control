@@ -114,7 +114,7 @@ public class ProposalsRunnable extends GoalBasedOperationRunnable {
                                                                          false,
                                                                          _fastMode);
     
-    OptimizerResult result =  _kafkaCruiseControl.optimizations(clusterModel, _goalsByPriority, _operationProgress, null, optimizationOptions);
+    OptimizerResult result = _kafkaCruiseControl.optimizations(clusterModel, _goalsByPriority, _operationProgress, null, optimizationOptions);
     System.out.println("workWithClusterModel");
     System.out.println(result.toString());
     return result;

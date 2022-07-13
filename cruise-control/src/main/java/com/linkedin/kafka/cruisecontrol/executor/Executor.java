@@ -1351,9 +1351,9 @@ public class Executor {
         LOG.info("Executor will execute {} task(s)", tasksToExecute.size());
 
         Gson gson = new Gson();
-        tasksToExecute.forEach((task) -> {
+        tasksToExecute.forEach(task -> {
           Map<String, Object> taskJsonStructure = task.getJsonStructure();
-          String taskJson  = gson.toJson(taskJsonStructure);
+          String taskJson = gson.toJson(taskJsonStructure);
           System.out.println(String.format("Task to execute %s", taskJson));
         });
 
