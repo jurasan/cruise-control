@@ -147,6 +147,7 @@ public class OptimizationResult extends AbstractCruiseControlResponse {
     }
     optimizationResult.put(GOAL_SUMMARY, goalSummary);
     optimizationResult.put(LOAD_AFTER_OPTIMIZATION, _optimizerResult.brokerStatsAfterOptimization().getJsonStructure());
+    optimizationResult.put(LOAD_BEFORE_OPTIMIZATION, _optimizerResult.brokerStatsBeforeOptimization().getJsonStructure());
     optimizationResult.put(VERSION, JSON_VERSION);
     Gson gson = new GsonBuilder().serializeNulls().serializeSpecialFloatingPointValues().create();
 
